@@ -18,13 +18,28 @@
 <body>
 <i>Fill out the form. Asterisk(*) means required.</i>
 
-    <form:form action="preocessForm" modelAttribute="customer">
+    <form:form action="processForm" modelAttribute="customer">
 
         First name: <form:input path="firstName" />
         <br><br>
 
-        Last name (*): <form:input path="LastName" />
-        <form:errors path="LastName" cssClass="error" />
+        Last name (*): <form:input path="lastName" />
+        <form:errors path="lastName" cssClass="error" />
+
+        <br><br>
+
+        Free passes (*): <form:input path="freePasses" />
+        <form:errors path="freePasses" cssClass="error" />
+
+        <br><br>
+
+        Postal code (*): <form:input path="postCode" />
+        <form:errors path="postCode" cssClass="error" />
+
+        <br><br>
+
+        Course code (*): <form:input path="courseCode" />
+        <form:errors path="courseCode" cssClass="error" />
 
         <br><br>
 

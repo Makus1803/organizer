@@ -12,7 +12,7 @@
 <a href="/student/showform">Student form</a>
 <br><br>
 
-<a href="/customer/showForm">Student form</a>
+<a href="/customer/showForm">Customer form</a>
 <br><br>
 
 </body>
