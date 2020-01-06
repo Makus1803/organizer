@@ -15,7 +15,7 @@ public class User {
     private String username;
 
     @Column(name = "email_address", nullable = false, length = 100, unique = true)
-    private String emaiAddress;
+    private String emailAddress;
 
     @Column(name = "password", nullable = false, length = 40)
     private String password;
@@ -36,7 +36,7 @@ public class User {
     public static User create(String username, String emaiAddress, String password) {
         User user = new User();
         user.username = username;
-        user.emaiAddress = emaiAddress;
+        user.emailAddress = emaiAddress;
         user.password = password;
         user.firstName = "";
         user.lastName = "";
@@ -52,8 +52,8 @@ public class User {
         return username;
     }
 
-    public String getEmaiAddress() {
-        return emaiAddress;
+    public String getEmailAddress() {
+        return emailAddress;
     }
 
     public String getPassword() {
@@ -78,12 +78,12 @@ public class User {
         if (!(o instanceof User)) return false;
         User user = (User) o;
         return username.equals(user.username) &&
-                emaiAddress.equals(user.emaiAddress);
+                emailAddress.equals(user.emailAddress);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(username, emaiAddress);
+        return Objects.hash(username, emailAddress);
     }
 
     @Override
@@ -91,7 +91,7 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
-                ", emaiAddress='" + emaiAddress + '\'' +
+                ", emaiAddress='" + emailAddress + '\'' +
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +

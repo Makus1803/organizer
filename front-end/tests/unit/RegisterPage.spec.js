@@ -54,81 +54,81 @@ describe('RegisterPage.vue', () => {
     expect(buttonSubmit.text()).toEqual('Create Account')
   })
 
-  // it('should contain data model with initial values', () => {
-  //   expect(wrapper.vm.form.username).toEqual('')
-  //   expect(wrapper.vm.form.emailAddress).toEqual('')
-  //   expect(wrapper.vm.form.password).toEqual('')
-  // })
-  //
-  // it('should have form inputs bound with data model', () => {
-  //   const username = 'sunny'
-  //   const emailAddress = 'sunny@local'
-  //   const password = 'VueJsRocks!'
-  //
-  //   wrapper.vm.form.username = username
-  //   wrapper.vm.form.emailAddress = emailAddress
-  //   wrapper.vm.form.password = password
-  //   expect(fieldUsername.element.value).toEqual(username)
-  //   expect(fieldEmailAddress.element.value).toEqual(emailAddress)
-  //   expect(fieldPassword.element.value).toEqual(password)
-  // })
-  //
-  // it('should have form submit event handler `submit form`', () => {
-  //   const stub = jest.fn()
-  //   wrapper.setMethods({ submitForm: stub })
-  //   buttonSubmit.trigger('submit')
-  //   expect(stub).toBeCalled()
-  // })
-  //
-  // it('should register when it is a new user', async () => {
-  //   expect.assertions(2)
-  //   const stub = jest.fn()
-  //   wrapper.vm.$router.push = stub
-  //   wrapper.vm.form.username = 'sunny'
-  //   wrapper.vm.form.emailAddress = 'sunny@local.com'
-  //   wrapper.vm.form.password = 'JestRocks!'
-  //   wrapper.vm.submitForm()
-  //   expect(registerSpy).toBeCalled()
-  //   await wrapper.vm.$nextTick()
-  //   expect(stub).toHaveBeenCalledWith({ name: 'LoginPage' })
-  // })
-  //
-  // it('should fail if it is not a new user', async () => {
-  //   expect.assertions(3)
-  //   // in the mock only sunny@local.com is new user
-  //   wrapper.vm.form.username = 'CorrectUsername'
-  //   wrapper.vm.form.emailAddress = 'makus@local.com'
-  //   wrapper.vm.form.password = 'CorrectPassword123!'
-  //   expect(wrapper.find('.failed').isVisible()).toBe(false)
-  //   wrapper.vm.submitForm()
-  //   expect(registerSpy).toBeCalled()
-  //   await wrapper.vm.$nextTick()
-  //   expect(wrapper.find('.failed').isVisible()).toBe(true)
-  // })
-  //
-  // it('should fail when the email address is invalid', () => {
-  //   wrapper.vm.form.username = 'CorrectUsername'
-  //   wrapper.vm.form.emailAddress = 'bad-email-address'
-  //   wrapper.vm.form.password = 'CorrectPassword123!'
-  //   wrapper.vm.submitForm()
-  //   expect(registerSpy).not.toHaveBeenCalled()
-  // })
-  //
-  // it('should fail if username is invalid', () => {
-  //   wrapper.vm.form.username = 't'
-  //   wrapper.vm.form.emailAddress = 'correct@mail.com'
-  //   wrapper.vm.form.password = 'CorrectPassword123!'
-  //   wrapper.vm.submitForm()
-  //   expect(registerSpy).not.toHaveBeenCalled()
-  // })
-  //
-  // it('should fail if password is invalid', () => {
-  //   wrapper.vm.form.username = 'CorrectUsername'
-  //   wrapper.vm.form.emailAddress = 'correct@username.com'
-  //   wrapper.vm.form.password = 't'
-  //   wrapper.vm.submitForm()
-  //   expect(registerSpy).not.toHaveBeenCalled()
-  // })
+  it('should contain data model with initial values', () => {
+    expect(wrapper.vm.form.username).toEqual('')
+    expect(wrapper.vm.form.emailAddress).toEqual('')
+    expect(wrapper.vm.form.password).toEqual('')
+  })
+
+  it('should have form inputs bound with data model', () => {
+    const username = 'sunny'
+    const emailAddress = 'sunny@local'
+    const password = 'VueJsRocks!'
+
+    wrapper.vm.form.username = username
+    wrapper.vm.form.emailAddress = emailAddress
+    wrapper.vm.form.password = password
+    expect(fieldUsername.element.value).toEqual(username)
+    expect(fieldEmailAddress.element.value).toEqual(emailAddress)
+    expect(fieldPassword.element.value).toEqual(password)
+  })
+
+  it('should have form submit event handler `submit form`', () => {
+    const stub = jest.fn()
+    wrapper.setMethods({ submitForm: stub })
+    buttonSubmit.trigger('submit')
+    expect(stub).toBeCalled()
+  })
+
+  it('should register when it is a new user', async () => {
+    expect.assertions(2)
+    const stub = jest.fn()
+    wrapper.vm.$router.push = stub
+    wrapper.vm.form.username = 'sunny'
+    wrapper.vm.form.emailAddress = 'sunny@local.com'
+    wrapper.vm.form.password = 'JestRocks!'
+    wrapper.vm.submitForm()
+    expect(registerSpy).toBeCalled()
+    await wrapper.vm.$nextTick()
+    expect(stub).toHaveBeenCalledWith({ name: 'LoginPage' })
+  })
+
+  it('should fail if it is not a new user', async () => {
+    expect.assertions(3)
+    // in the mock only sunny@local.com is new user
+    wrapper.vm.form.username = 'CorrectUsername'
+    wrapper.vm.form.emailAddress = 'makus@local.com'
+    wrapper.vm.form.password = 'CorrectPassword123!'
+    expect(wrapper.find('.failed').isVisible()).toBe(false)
+    wrapper.vm.submitForm()
+    expect(registerSpy).toBeCalled()
+    await wrapper.vm.$nextTick()
+    expect(wrapper.find('.failed').isVisible()).toBe(true)
+  })
+
+  it('should fail when the email address is invalid', () => {
+    wrapper.vm.form.username = 'CorrectUsername'
+    wrapper.vm.form.emailAddress = 'bad-email-address'
+    wrapper.vm.form.password = 'CorrectPassword123!'
+    wrapper.vm.submitForm()
+    expect(registerSpy).not.toHaveBeenCalled()
+  })
+
+  it('should fail if username is invalid', () => {
+    wrapper.vm.form.username = 't'
+    wrapper.vm.form.emailAddress = 'correct@mail.com'
+    wrapper.vm.form.password = 'CorrectPassword123!'
+    wrapper.vm.submitForm()
+    expect(registerSpy).not.toHaveBeenCalled()
+  })
+
+  it('should fail if password is invalid', () => {
+    wrapper.vm.form.username = 'CorrectUsername'
+    wrapper.vm.form.emailAddress = 'correct@username.com'
+    wrapper.vm.form.password = 't'
+    wrapper.vm.submitForm()
+    expect(registerSpy).not.toHaveBeenCalled()
+  })
 })
 
 // describe('RegisterPage.vue', () =>{
