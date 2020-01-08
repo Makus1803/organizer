@@ -7,7 +7,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private static final String[] PUBLIC = new String[]{
-        "/error", "/login", "/logout", "/register", "/api/registrations"};
+        "/", "/error", "/login", "/logout", "/register", "/api/registrations"};
 
     @Override
     protected void configure(HttpSecurity http) throws Exception{

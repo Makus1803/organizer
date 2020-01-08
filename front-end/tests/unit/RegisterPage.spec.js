@@ -1,7 +1,7 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 import VueRouter from 'vue-router'
 import Vuelidate from 'Vuelidate'
-import registrationService from '../../src/services/registration'
+import registrationService from '../../src/services/registration.js'
 import RegisterPage from '../../src/views/RegisterPage'
 
 // adding vue-router to the test to access vm.$touter
