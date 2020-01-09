@@ -98,4 +98,9 @@ public class User {
                 ", createdDate=" + createdDate +
                 '}';
     }
+
+    public void updateName(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 }

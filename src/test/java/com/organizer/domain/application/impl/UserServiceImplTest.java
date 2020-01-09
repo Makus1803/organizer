@@ -6,25 +6,87 @@ import com.organizer.domain.common.mail.MailManager;
 import com.organizer.domain.common.mail.MessageVariable;
 import com.organizer.domain.model.user.*;
 import com.organizer.domain.model.user.events.UserRegisteredEvent;
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 public class UserServiceImplTest {
     private RegistrationManagement registrationManagementMock;
     private DomainEventPublisher eventPublisherMock;
     private MailManager mailManagerMock;
-    private  UserServiceImpl instance;
+    private UserRepository userRepositoryMock;
+    private UserServiceImpl instance;
 
     @Before
     public void setUp(){
         registrationManagementMock = mock(RegistrationManagement.class);
         eventPublisherMock = mock(DomainEventPublisher.class);
         mailManagerMock = mock(MailManager.class);
+        userRepositoryMock = mock(UserRepository.class);
         instance = new UserServiceImpl(registrationManagementMock, eventPublisherMock,
-                mailManagerMock);
+                mailManagerMock, userRepositoryMock);
     }
+
+    //------------------- Method loadUserByUSERNAME()
+
+    @Test
+    public void loadUserByUsername_emptyUsername_shouldFail() {
+        Exception exception = null;
+        try{
+            instance.loadUserByUsername("");
+        } catch (Exception e){
+            exception = e;
+        }
+        assertNotNull(exception);
+        assertTrue(exception instanceof UsernameNotFoundException);
+        verify(userRepositoryMock, never()).findByUsername("");
+        verify(userRepositoryMock, never()).findByEmailAddress("");
+    }
+
+    @Test
+    public void loadUserByUsername_notExistUsername_shouldFail() {
+        String notExistingUsername = "NotExist";
+        when(userRepositoryMock.findByUsername(notExistingUsername)).thenReturn(null);
+        Exception exception = null;
+        try {
+            instance.loadUserByUsername(notExistingUsername);
+        } catch (Exception e){
+            exception = e;
+        }
+        assertNotNull(exception);
+        assertTrue(exception instanceof UsernameNotFoundException);
+        verify(userRepositoryMock).findByUsername(notExistingUsername);
+        verify(userRepositoryMock, never()).findByEmailAddress(notExistingUsername);
+    }
+
+    @Test
+    public void loadUserByUsername_existUsername_shouldSucceed() throws IllegalAccessException {
+        String existingUsername = "Exist";
+        User foundUser = User.create(existingUsername, "user@local.com", "CorrectPassword");
+        foundUser.updateName("Test", "User");
+        FieldUtils.writeField(foundUser, "id", 1L, true);
+        when(userRepositoryMock.findByUsername(existingUsername)).thenReturn(foundUser);
+        Exception exception = null;
+        UserDetails userDetails = null;
+        try {
+            userDetails = instance.loadUserByUsername(existingUsername);
+        } catch (Exception e){
+            exception = e;
+        }
+        assertNull(exception);
+        verify(userRepositoryMock).findByUsername(existingUsername);
+        verify(userRepositoryMock, never()).findByEmailAddress(existingUsername);
+        assertNotNull(userDetails);
+        assertEquals(existingUsername, userDetails.getUsername());
+        assertTrue(userDetails instanceof SimpleUser);
+    }
+
+    //------------------- Method register()
 
     @Test(expected = IllegalArgumentException.class)
     public void register_nullCommand_shouldFail() throws RegistrationException{
