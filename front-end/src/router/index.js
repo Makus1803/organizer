@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import LoginPage from '../views/LoginPage'
 import RegisterPage from '../views/RegisterPage'
 import HomePage from "../views/HomePage";
+import PanelPage from "../views/PanelPage";
 
 Vue.use(Router)
 
@@ -19,9 +20,14 @@ export default new Router({
     name: 'LoginPage',
     component: LoginPage
   },
-  {
-    path: '/register',
-    name: 'RegisterPage',
-    component: RegisterPage
-  }]
+    {
+      path: '/register',
+      name: 'RegisterPage',
+      component: RegisterPage
+    },
+    {
+      path: '/panel',
+      name: 'PanelPage',
+      component: PanelPage
+    }]
 })

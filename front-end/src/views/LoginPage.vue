@@ -2,7 +2,7 @@
   <div class="container public">
     <div class="row justify-content-center">
       <div class="form">
-        <Logo/>
+        <PageHeader/>
         <form @submit.prevent="submitForm">
           <div v-show="errorMessage" class="alert alert-danger failed">{{ errorMessage }}</div>
           <div class="form-group">
@@ -34,7 +34,7 @@
 <script>
 import { required } from 'vuelidate/lib/validators'
 import authenticationService from '../services/authentication'
-import Logo from '../components/Logo.vue'
+import PageHeader from '../components/PageHeader.vue'
 import PageFooter from '../components/PageFooter.vue'
 
 export default {
@@ -49,7 +49,7 @@ export default {
     }
   },
   components: {
-    Logo,
+    PageHeader,
     PageFooter
   },
   validations: {
